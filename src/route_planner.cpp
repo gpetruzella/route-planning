@@ -28,10 +28,11 @@ void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
 RouteModel::Node *RoutePlanner::NextNode() {
   
   std::sort(open_list.begin(), open_list.end(), [](RouteModel::Node* a, RouteModel::Node* b) {
-  return (a->h_value + a->g_value) < (b->h_value + b->g_value);
+  return (a->h_value + a->g_value) > (b->h_value + b->g_value);
   });
-  RouteModel::Node* lowest_node = open_list.front();
+  RouteModel::Node* lowest_node = open_list.back();
   open_list.pop_back();
+  return lowest_node;
 }
 
 std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node *current_node) {
