@@ -16,7 +16,7 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
 
 void RoutePlanner::AddNeighbors(RouteModel::Node *current_node) {
      current_node->FindNeighbors();
-     for (auto neighbor_node : current_node-> neighbors) {
+     for (auto neighbor_node : current_node->neighbors) {
         neighbor_node->parent = current_node;
         neighbor_node->h_value = CalculateHValue(neighbor_node);
         neighbor_node->g_value = current_node->g_value +  current_node->distance(*neighbor_node);
@@ -38,7 +38,6 @@ std::vector<RouteModel::Node> RoutePlanner::ConstructFinalPath(RouteModel::Node 
     distance = 0.0f;
     std::vector<RouteModel::Node> path_found;
 
-    // TODO: Implement your solution here.
     while (current_node->parent != nullptr) {
       path_found.emplace_back(*current_node);
       distance += current_node->distance(*current_node->parent);
